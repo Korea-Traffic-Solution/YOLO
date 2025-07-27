@@ -23,6 +23,12 @@ def kickboard_analysis(image):
     )
     return kickboard_detected
 
+# 킥보드 bbox 리스트 반환
+def kickboard_boxes(image):
+    kickboard_results = model_kickboard(image)
+    if kickboard_results[0].boxes is not None and len(kickboard_results[0].boxes) > 0:
+        return kickboard_results[0].boxes.xyxy.cpu().numpy().tolist()
+    return []
 
 # 사람 분석 모듈
 def person_analysis(image):
@@ -32,6 +38,12 @@ def person_analysis(image):
     )
     return person_detected
 
+# 사람 bbox 리스트 반환
+def person_boxes(image):
+    person_results = model_person(image)
+    if person_results[0].boxes is not None and len(person_results[0].boxes) > 0:
+        return person_results[0].boxes.xyxy.cpu().numpy().tolist()
+    return []
 
 # 킥보드 브랜드 분석 모듈
 def brand_analysis(image):
